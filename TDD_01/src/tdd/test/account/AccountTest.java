@@ -1,7 +1,8 @@
 package tdd.test.account;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import main.Account;
@@ -10,21 +11,24 @@ public class AccountTest {
 	//테스트 케이스 작성흐름을 위해 일단 놔놓는다.
 	//계좌를 생성한다. -> 계좌가 정상적으로 생성됐는지 확인한다.
 
+	private Account account;
+
 	//이 메서드를 테스트한다.
 	@Test
 	public void testAccount() throws Exception{
-		Account account = new Account(10000);
-		//junit을 쓰므로 삭제
-		/*if(account == null){
-			throw new Exception("계좌생성 실패");
-		}*/
+		setup();
 
+	}
+	
+	//Before를 하려면 private가 아닌 public으로 한다.
+	@Before
+	public void setup() {
+		account = new Account(10000);
 	}
 
 	@Test
 	public void testGetBalance() throws Exception {
-		//10000원으로 계좌 생성 - 잔고조회결과일치
-		Account account = new Account(10000);
+		//setup();
 		assertEquals(10000, account.getBalance());
 		
 		account = new Account(100);
@@ -42,10 +46,7 @@ public class AccountTest {
 	//예금 테스트
 	@Test
 	public void testDeposit() throws Exception {
-		//10000원으로 계좌생성
-		//1000원 입금
-		//잔고 11000원 확인
-		Account account = new Account(10000);
+		//setup();
 		account.deposit(1000);
 		assertEquals(11000, account.getBalance());
 	}
@@ -53,10 +54,7 @@ public class AccountTest {
 	//출금 테스트
 	@Test
 	public void testWithdraw() throws Exception {
-		//10000원으로 계좌생성
-		//1000원 출금
-		//잔고 9000원 확인
-		Account account = new Account(10000);
+		//setup();
 		account.withdraw(1000);
 		assertEquals(9000, account.getBalance());
 	}
